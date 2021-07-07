@@ -6,7 +6,7 @@
 #include <chrono>
 #include "modules/modules.h"
 
-extern std::map<const char*, module> modules;
+extern std::map<std::string, module> modules;
 
 int main(int argc, char** argv) {
 
@@ -23,23 +23,12 @@ int main(int argc, char** argv) {
 		if (input == "exit") {
 			break;
 
+		} else if(modules.count(input) > 0) {
+			auto func = modules[input];
+			func();
 		} else {
-
-			try {
-				if (modules[input.c_str()] == nullptr)
-					throw std::runtime_error("Unknown Command");
-
-				auto func = modules[input.c_str()];
-				func();
-
-			} catch (std::runtime_error& e) {
-
-				fprintf(stderr,"%s\n", e.what());
-				fflush(stderr);
-				continue;
-
-			}
-
+			fputs("Unknown Command\n", stderr);
+			fflush(stderr);
 		}
 
 	}

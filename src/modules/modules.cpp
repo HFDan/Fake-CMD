@@ -1,14 +1,11 @@
 #pragma once
 #include <map>
+#include <string>
 #include "modules.h"
 
-MODULEFUNC(tree) {
+MODULEFUNC(tree);
 
-	puts("amogus");
-
-}
-
-std::map<const char*, module> modules = {
+std::map<std::string, module> modules = {
 
 		{"tree", tree}
 
