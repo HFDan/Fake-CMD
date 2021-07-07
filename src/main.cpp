@@ -20,6 +20,10 @@ int main(int argc, char** argv) {
 		fflush(stdout);
 		std::cin >> input;
 
+		if (input.empty()) {
+			continue;
+		}
+
 		if (input == "exit") {
 			break;
 
