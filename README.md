@@ -2,4 +2,11 @@
 
 # Fake-CMD
 
+## Description
 A (modular) program to confuse scammers. Perfect for scambaiting.
+
+## Contributing
+Anyone is free to create modules, as long as their license is _**MPL-2.0**_.
+
+### How to contribute?
+Check the [wiki](https://github.com/HFDan/Fake-CMD/wiki).
