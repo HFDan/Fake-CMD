@@ -1,7 +1,6 @@
-#include <iostream>
+#include <cstdio>
 #include <chrono>
 #include <thread>
-#include <conio.h>
 #include <random>
 #include "modules.h"
 
