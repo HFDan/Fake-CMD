@@ -4,7 +4,6 @@
 #include <random>
 #include "modules.h"
 
-
 MODULEFUNC(tree) {
 
 	std::random_device randomDevice;
@@ -20,7 +19,7 @@ MODULEFUNC(tree) {
 
 	system("cls");
 	printf(u8"\nAll files scanned:\n\n|___________|___________|______________|__________________________|\n|  Viruses  |  Hackers  | IP Infection |        Conclusion        |\n|___________+___________+______________+__________________________|\n| 0         | 0         | None         | PC: Healthy              |\n| All Clear | All Clear | All Clear    | Tech Support: Not needed |\n|           |           |              |                          |\n|___________|___________|______________|__________________________|\n\n\n");
-	system("pause");
+	std::this_thread::sleep_for(std::chrono::seconds(10));
 	system("cls");
 
 	return 0;
