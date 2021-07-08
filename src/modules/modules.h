@@ -1,5 +1,5 @@
 #pragma once
 #include <map>
-#define MODULEFUNC(x) void x()
+#define MODULEFUNC(x) int x()
 
-typedef void(*module)();
+typedef int(*module)();

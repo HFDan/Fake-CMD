@@ -22,4 +22,6 @@ MODULEFUNC(tree) {
 	printf(u8"\nAll files scanned:\n\n|___________|___________|______________|__________________________|\n|  Viruses  |  Hackers  | IP Infection |        Conclusion        |\n|___________+___________+______________+__________________________|\n| 0         | 0         | None         | PC: Healthy              |\n| All Clear | All Clear | All Clear    | Tech Support: Not needed |\n|           |           |              |                          |\n|___________|___________|______________|__________________________|\n\n\n");
 	system("pause");
 	system("cls");
+
+	return 0;
 }

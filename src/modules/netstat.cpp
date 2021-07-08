@@ -16,4 +16,5 @@ MODULEFUNC(netstat) {
 		"  UDP    127.0.0.1:420                                 NO_HACKERS_DETECTED\n"
    	);
 
+	return 0;
 }
