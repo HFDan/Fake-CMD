@@ -5,7 +5,7 @@
 
 extern std::map<std::string, module> modules;
 
-TEST(ModuleTest, AllModules) {
+TEST(MonolithicTest, AllModules) {
 
 
 	for (const auto& it : modules) {
