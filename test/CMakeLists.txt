@@ -1,9 +1,8 @@
 enable_testing()
-
-add_executable(module_test moduleTest.cpp)
-
-target_link_libraries(module_test gtest_main gtest modules)
-target_include_directories(module_test PUBLIC ${CMAKE_SOURCE_DIR}/src/modules)
-
 include(GoogleTest)
-gtest_discover_tests(module_test)
+
+add_executable(MonolithicTest monolithicTest.cpp)
+target_link_libraries(MonolithicTest gtest_main gtest modules)
+target_include_directories(MonolithicTest PUBLIC ${CMAKE_SOURCE_DIR}/src/modules)
+gtest_discover_tests(MonolithicTest)
+add_test(NAME monolithic COMMAND "MonolithicTest")
