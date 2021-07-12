@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+   --accent-color: #641BFF;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+    font-family: Dosis, 'sans-serif';
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comparison {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    margin: 1rem;
+}
+
+.comparison-header {
+    font-size: 5rem;
+}
+
+.comparison-column {
+    background-color: #FFFFFF;
+    box-shadow: 0 7px 30px rgba(52, 31, 97, 0.1);
+    padding: 2rem;
+    flex-grow: 1;
+    max-width: 275px;
+    flex-basis: 0;
+    border-radius: 12px;
+}
+
+.comparison-column .download-button {
+    display: inline-block;
+    padding: 10px 30px;
+    color: var(--accent-color);
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+    transition: .3s ease;
+    transition-property: background-color, color;
+}
+
+.comparison-column.accent .download-button {
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF
+}
+
+.comparison-column .download-button:hover {
+    color: #FFFFFF;
+    background-color: var(--accent-color);
+}
+
+.comparison-column.accent .download-button:hover {
+    color: var(--accent-color);
+    background-color: #FFFFFF;
+}
+
+.comparison-column.accent {
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    box-shadow: 0 7px 30px rgba(52, 13, 135, 0.3);
+}
+
+.comparison-column .comparison-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.comparison-column .divider {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.comparison-column.accent .divider {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.comparison-column .feature {
+    display: flex;
+    align-items: center;
+    margin: .5rem;
+    font-size: 2rem;
+}
+
+/* Hero */
+#hero {
+    background-image: url("background.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+    z-index: 1;
+}
+
+#hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    opacity: .7;
+    z-index: -1;
+}
+
+#hero .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    justify-content: flex-start;
+}
+
+/* Text anim*/
+#hero h1 {
+    display: block;
+    width: fit-content;
+    font-size: 4rem;
+    position: relative;
+    color: transparent;
+    animation: text_reveal .5s ease forwards;
+    animation-delay: .3s;
+}
+
+#hero h1:nth-child(1) {
+    animation-delay: .7s;
+}
+
+#hero h1:nth-child(2) {
+    animation-delay: 1.7s;
+}
+
+#hero h1:nth-child(3) {
+    font-weight: 500;
+    animation: text_reveal_keyword .5s ease forwards;
+    animation-delay: 2.7s;
+}
+
+/* Box anim*/
+#hero h1 span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--accent-color);
+    animation: text_reveal_box .5s ease;
+    animation-delay: .3s;
+}
+
+#hero h1:nth-child(1) span {
+    animation-delay: .5s;
+}
+
+#hero h1:nth-child(2) span {
+    animation-delay: 1.5s;
+}
+
+#hero h1:nth-child(3) span {
+    animation-delay: 2.5s;
+}
+
+#hero .cta {
+    display: inline-block;
+    padding: 10px 30px;
+    color: var(--accent-color);
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+    transition: .3s ease;
+    transition-property: background-color, color;
+}
+
+#hero .cta:hover {
+    color: #FFFFFF;
+    background-color: var(--accent-color);
+}
+
+/*Downloads Section*/
+#downloads .main-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+}
+
+#downloads .main-section .title {
+    text-align: center;
+    padding-top: 100px;
+}
+
+#downloads .main-section .title h1 {
+    font-size: 7rem;
+}
+
+#downloads .main-section .title p {
+    font-size: 3rem;
+}
+
+#downloads .main-section .content h1 {
+    font-size: 7rem;
+}
+
+#downloads .main-section .content p {
+    font-size: 2.5rem;
+}
