@@ -2,13 +2,16 @@
 #include <string>
 #include <map>
 #include <thread>
+#include <vector>
 #include <stdexcept>
 #include <chrono>
+#include <sstream>
 #include "modules/modules.h"
+#include "utility/utility.h"
 
 extern std::map<std::string, module> modules;
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
 
 	puts("Microsoft Windows [Version 10.0.69420.6789]\n(c) Microsoft Corporation. All rights reserved.\n");
 
@@ -20,16 +23,18 @@ int main(int argc, char** argv) {
 		fflush(stdout);
 		std::getline(std::cin, input);
 
-		if (input.empty()) {
+		command cmd = tokenizeCommand(input);
+
+		if (cmd[0].empty()) {
 			continue;
 		}
 
-		if (input == "exit") {
+		if (cmd[0] == "exit") {
 			break;
 
-		} else if(modules.count(input) > 0) {
-			auto func = modules[input];
-			func();
+		} else if (modules.count(cmd[0]) > 0) {
+			auto func = modules[cmd[0]];
+			func(cmd);
 		} else {
 			fputs("Unknown Command\n", stderr);
 			fflush(stderr);
