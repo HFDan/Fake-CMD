@@ -291,6 +291,10 @@ img {
 
 }
 
+#contribute .main-section .title {
+    margin-top: 100px;  
+}
+
 #contribute .main-section .title h1 {
     text-align: center;
     color: #FFFFFF;
