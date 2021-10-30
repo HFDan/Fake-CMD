@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 	while (true) {
 
 		std::string input;
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100)); // TODO: This is bad practice, but it`s the only way to stop a race condition between stderr and stdout
 		fputs("C:\\WINDOWS\\System32>", stdout);
 		fflush(stdout);
 		std::getline(std::cin, input);
