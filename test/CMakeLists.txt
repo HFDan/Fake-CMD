@@ -1,6 +1,6 @@
 include(GoogleTest)
 
 add_executable(MonolithicTest monolithicTest.cpp)
-target_link_libraries(MonolithicTest gtest_main gtest libmodules utility)
+target_link_libraries(MonolithicTest gtest_main gtest libmodules)
 target_include_directories(MonolithicTest PUBLIC ${CMAKE_SOURCE_DIR}/src/modules ${CMAKE_SOURCE_DIR}/lib)
 gtest_discover_tests(MonolithicTest)
