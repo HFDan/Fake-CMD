@@ -13,3 +13,4 @@ Check the [wiki](https://github.com/HFDan/Fake-CMD/wiki).
 
 # Third-party licenses
 This project uses CPM.cmake\(MIT License\). It is only a build dependency, not a runtime one.
+This project uses yaml-cpp\(MIT License\)

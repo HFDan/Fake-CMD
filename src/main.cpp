@@ -3,15 +3,17 @@
 #include <map>
 #include <thread>
 #include <vector>
-#include <stdexcept>
 #include <chrono>
-#include <sstream>
-#include "modules/modules.h"
-#include "utility/utility.h"
+#include <modules/modules.h>
+#include <utility/utility.h>
 
 extern std::map<std::string, module> modules;
 
 int main(int argc, char **argv) {
+
+	// TODO: Scan for runtime modules
+	
+	printf("Evaluiated path is:\n%s\n", __GetModulePath().c_str());
 
 	puts("Microsoft Windows [Version 10.0.69420.6789]\n(c) Microsoft Corporation. All rights reserved.\n");
 
