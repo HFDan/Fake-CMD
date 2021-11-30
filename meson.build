@@ -1,12 +1,12 @@
 project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'])
 
-thread_dep = dependency('threads')
-gtest = subproject('gtest')
-
 if host_machine.system() == 'windows'
 	add_global_arguments('-DWIN32', language : 'c')
 	add_global_arguments('-DWIN32', language : 'cpp')
 endif
+
+thread_dep = dependency('threads')
+gtest = subproject('gtest')
 
 src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp']
 libmodules = static_library('libmodules', src_libmodules, dependencies: [thread_dep])
