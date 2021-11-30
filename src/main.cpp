@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
 	// TODO: Scan for runtime modules
 	
 	printf("Evaluiated path is:\n%s\n", __GetModulePath().c_str());
+	registerRuntimeCommands(modules);
 
 	puts("Microsoft Windows [Version 10.0.69420.6789]\n(c) Microsoft Corporation. All rights reserved.\n");
 

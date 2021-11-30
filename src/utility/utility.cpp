@@ -6,7 +6,6 @@
 #include <filesystem>
 #include <sstream>
 #include <memory>
-#include <yaml-cpp/yaml.h>
 
 #ifdef WIN32
 	#include <windows.h>
@@ -14,31 +13,29 @@
 	#include <winerror.h>
 	#include <minwindef.h>
 	std::string __GetModulePath() {
-		std::string path = "";
+		std::string Path = "";
 		LPSTR foo = new char[MAX_PATH];
 		if (SHGetFolderPath(NULL, CSIDL_PROFILE, NULL, 0, foo) != S_OK) {
 			printf("Error getting path.\n");
 		}
-		path = std::string(foo) + std::string(R"(\.fake_cmd\)");
+		Path = std::string(foo) + std::string(R"(\.fake_cmd\)");
 		delete [] foo;
-		return path;
+		return Path;
 	}
 
 #else
 	#include <unistd.h>
 
 	std::string __GetModulePath() {
-		std::string path = "";
-		char* username = new char[32]; // The username char limit in linux is 32 char as per man useradd
-		getlogin_r(username, 32);
+		std::string Path = "";
+		char* Username = new char[32]; // The username char limit in linux is 32 char as per man useradd
+		getlogin_r(Username, 32);
 
-		path = std::string(R"(/home/)") + std::string(username) + std::string(R"(/.fake_cmd/)");
+		Path = std::string(R"(/home/)") + std::string(Username) + std::string(R"(/.fake_cmd/)");
 
-		delete [] username;
-		return path;
+		delete [] Username;
+		return Path;
 	}
-
-	const std::filesystem::path ModulePath(__GetModulePath());
 #endif
 
 command tokenizeCommand(const std::string& input) {
@@ -54,6 +51,16 @@ command tokenizeCommand(const std::string& input) {
 }
 
 void registerRuntimeCommands(std::map<std::string, module>& modules) {
+	const std::filesystem::path path(__GetModulePath());
+
+	if (!std::filesystem::exists(path) || !std::filesystem::is_directory(path)) { // Check if either the directory does not exist, or if it's not a directory, and create it.
+		std::filesystem::create_directory(path);
+	}
+
+	for (const auto& entry : std::filesystem::directory_iterator{path}) { // For each file in the directory
+		std::fstream file(entry.path(), std::ios::in); // TODO: Implement
+	}
+
 	
 }
 
