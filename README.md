@@ -16,4 +16,5 @@ Check the [wiki](https://github.com/HFDan/Fake-CMD/wiki).
 
 # Third-party licenses
 
-This project uses [GTest](https://github.com/google/googletest), by Google \(BSD-3-Clause License\)
+- [GTest](https://github.com/google/googletest), \(BSD-3-Clause License\)
+- [Lua](https://lua.org), \(MIT License\)

@@ -7,9 +7,10 @@ endif
 
 thread_dep = dependency('threads')
 gtest = subproject('gtest')
+lua = subproject('lua')
 
 src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp']
-libmodules = static_library('libmodules', src_libmodules, dependencies: [thread_dep])
+libmodules = static_library('libmodules', src_libmodules, dependencies: [thread_dep, dependency('lua-5.4')])
 
 src_main = ['src/main.cpp', 'src/utility/utility.cpp']
 executable('fake-cmd', src_main, dependencies: [thread_dep], include_directories: include_directories('src/'), link_with: [libmodules])

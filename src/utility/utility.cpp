@@ -70,7 +70,7 @@ void registerRuntimeCommands() {
 			 path}) {  // For each file in the directory
 
 		runtimeModules.insert(std::make_pair(
-			entry.path().filename().generic_string(),
+			entry.path().filename().replace_extension("").generic_string(),
 			entry.path().generic_string()));
 	}
 }
