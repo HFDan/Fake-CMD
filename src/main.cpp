@@ -1,3 +1,4 @@
+#include <debug.h>
 #include <modules/modules.h>
 #include <modules/runtime_modules.h>
 #include <utility/utility.h>
@@ -13,13 +14,15 @@ extern std::map<std::string, module> modules;
 extern std::map<std::string, std::string> runtimeModules;
 
 int main(int argc, char **argv) {
-	// TODO: Scan for runtime modules
+	FCMD_DEBUGMSG(
+		"C++", 0, "Evaluated runtime module path is:\n%s\n",
+		__GetModulePath().c_str());
 
-	printf("Evaluiated path is:\n%s\n", __GetModulePath().c_str());
 	registerRuntimeCommands();
 
 	for (auto it : runtimeModules) {
-		printf("Available runtimeModule: %s\n", it.first.c_str());
+		FCMD_DEBUGMSG(
+			"C++", 0, "Available runtimeModule: %s", it.first.c_str());
 	}
 
 	puts(
@@ -37,7 +40,7 @@ int main(int argc, char **argv) {
 
 		command cmd = tokenizeCommand(input);
 
-		if (cmd[0].empty()) {
+		if (cmd.empty()) {
 			continue;
 		}
 
@@ -50,6 +53,7 @@ int main(int argc, char **argv) {
 
 		} else if (runtimeModules.count(cmd[0]) > 0) {
 			executeRuntimeModule(runtimeModules[cmd[0]]);
+
 		} else {
 			fputs("Unknown Command\n", stderr);
 			fflush(stderr);
