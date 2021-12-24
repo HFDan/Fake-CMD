@@ -1,8 +1,13 @@
 project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'])
 
 if host_machine.system() == 'windows'
-	add_global_arguments('-DWIN32', language : 'c')
-	add_global_arguments('-DWIN32', language : 'cpp')
+	add_global_arguments('-DWIN32 -DCLEAR_COMMAND="cls"', language : 'c')
+	add_global_arguments('-DWIN32 -DCLEAR_COMMAND="cls"', language : 'cpp')
+endif
+
+if host_machine.system() == 'linux'
+	add_global_arguments('-DCLEAR_COMMAND="clear"', language : 'c')
+	add_global_arguments('-DCLEAR_COMMAND="clear"', language : 'cpp')
 endif
 
 if get_option('buildtype').startswith('debug')
@@ -14,7 +19,7 @@ thread_dep = dependency('threads')
 gtest = subproject('gtest')
 lua = subproject('lua')
 
-src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp']
+src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp', 'src/lua/extensions/lua_fakecmd.cpp']
 libmodules = static_library('libmodules', src_libmodules, dependencies: [thread_dep, dependency('lua-5.4')], include_directories: include_directories('src/'))
 
 src_main = ['src/main.cpp', 'src/utility/utility.cpp']

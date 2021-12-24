@@ -1,4 +1,5 @@
 #include <debug.h>
+#include <lua/extensions/lua_fakecmd.h>
 
 #include <string>
 
@@ -7,6 +8,7 @@
 void executeRuntimeModule(std::string file) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
+	l_fakecmd_loadluaextensions(L);
 
 	int err = luaL_dofile(L, file.c_str());
 
