@@ -10,3 +10,8 @@ Anyone is free to create modules, as long as their license is _**MPL-2.0**_.
 
 ### How to contribute?
 Check the [wiki](https://github.com/HFDan/Fake-CMD/wiki).
+
+### Branches
+- main -> Latest stable release
+- develop -> Newest branch. Active development. Possibly unstable
+- staging -> Latest release candidate version
