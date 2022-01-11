@@ -10,8 +10,8 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
-jobs:
-  build:
+jobs:  
+  build-and-test:
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
@@ -26,4 +26,4 @@ jobs:
         action: test
         directory: Build
         meson-version: 0.61.0
-        options: -Ddefault_library=static
+        setup-options: -Ddefault_library=static
