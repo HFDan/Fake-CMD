@@ -18,3 +18,8 @@ Check the [wiki](https://github.com/HFDan/Fake-CMD/wiki).
 
 - [GTest](https://github.com/google/googletest), \(BSD-3-Clause License\)
 - [Lua](https://lua.org), \(MIT License\)
+
+### Branches
+- main -> Latest stable release
+- develop -> Newest branch. Active development. Possibly unstable
+- staging -> Latest release candidate version
