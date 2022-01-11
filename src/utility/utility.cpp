@@ -11,11 +11,9 @@
 
 std::map<std::string, std::string> runtimeModules;
 
-#ifdef WIN32
-#include <minwindef.h>
-#include <shlobj.h>
+#ifdef _WIN32
 #include <windows.h>
-#include <winerror.h>
+#include <Shlobj.h>
 std::string __GetModulePath() {
 	std::string Path = "";
 	LPSTR foo = new char[MAX_PATH];

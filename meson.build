@@ -1,8 +1,8 @@
-project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'])
+project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'], version: '2.0.0-rc1')
 
 if host_machine.system() == 'windows'
-	add_global_arguments('-DWIN32 -DCLEAR_COMMAND="cls"', language : 'c')
-	add_global_arguments('-DWIN32 -DCLEAR_COMMAND="cls"', language : 'cpp')
+	add_global_arguments('-DCLEAR_COMMAND="cls"', language : 'c')
+	add_global_arguments('-DCLEAR_COMMAND="cls"', language : 'cpp')
 endif
 
 if host_machine.system() == 'linux'

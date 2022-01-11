@@ -26,3 +26,4 @@ jobs:
         action: test
         directory: Build
         meson-version: 0.60.2
+        options: -Ddefault_library=static

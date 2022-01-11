@@ -1,12 +1,12 @@
 #include <algorithm>
 #include <cstdio>
 #include <iterator>
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #endif
 #include "modules.h"
 
-#ifndef WIN32
+#ifndef _WIN32
 MODULEFUNC(syskey) {
 	fputs("This module cannot run on macos/Linux, Sorry...\n", stderr);
 	return 0;
