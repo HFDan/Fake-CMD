@@ -1,6 +1,7 @@
+#include "modules.h"
+
 #include <map>
 #include <string>
-#include "modules.h"
 
 MODULEFUNC(tree);
 
@@ -10,8 +11,8 @@ MODULEFUNC(syskey);
 
 std::map<std::string, module> modules = {
 
-		{"tree",    tree},
-		{"netstat", netstat},
-		{"syskey", 	syskey}
+	{"tree", tree}, 
+	{"netstat", netstat},
+	{"syskey", syskey}
 
 };
