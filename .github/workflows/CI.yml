@@ -25,5 +25,5 @@ jobs:
       with:
         action: test
         directory: Build
-        meson-version: 0.60.2
+        meson-version: 0.61.99
         options: -Ddefault_library=static
