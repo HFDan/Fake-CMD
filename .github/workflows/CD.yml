@@ -1,0 +1,31 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "windows-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: build
+          directory: Build
+          meson-version: 0.61.0
+          setup-options: -Ddefault_library=static
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          draft: true
+          files: |
+            fake-cmd.exe
+          
+  
