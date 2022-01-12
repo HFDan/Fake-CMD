@@ -14,10 +14,6 @@ extern std::map<std::string, module> modules;
 extern std::map<std::string, std::string> runtimeModules;
 
 int main(int argc, char **argv) {
-	FCMD_DEBUGMSG(
-		"C++", 0, "Evaluated runtime module path is:\n%s\n",
-		__GetModulePath().c_str());
-
 	registerRuntimeCommands();
 
 	for (auto it : runtimeModules) {
@@ -31,9 +27,6 @@ int main(int argc, char **argv) {
 
 	while (true) {
 		std::string input;
-		std::this_thread::sleep_for(std::chrono::milliseconds(
-			100));	// TODO: This is bad practice, but it`s the only way to stop
-					// a race condition between stderr and stdout
 		fputs("C:\\WINDOWS\\System32>", stdout);
 		fflush(stdout);
 		std::getline(std::cin, input);

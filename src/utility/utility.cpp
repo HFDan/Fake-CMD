@@ -1,3 +1,4 @@
+#include <debug.h>
 #include <modules/modules.h>
 #include <utility/utility.h>
 
@@ -8,6 +9,12 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
+#ifdef _WIN32
+
+#else
+#include <ncurses.h>
+#endif
 
 std::map<std::string, std::string> runtimeModules;
 

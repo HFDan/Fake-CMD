@@ -1,0 +1,2 @@
+option('CD_32BIT', type: 'boolean', value: false)
+option('CD', type: 'boolean', value: false)

@@ -1,4 +1,9 @@
-project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'], version: '2.0.0-rc1')
+project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'], version: '2.0.0-rc2')
+
+if get_option('CD_32BIT')
+	add_global_arguments('-m32"', language : 'c')
+	add_global_arguments('-m32', language : 'cpp')
+endif
 
 if host_machine.system() == 'windows'
 	add_global_arguments('-DCLEAR_COMMAND="cls"', language : 'c')
@@ -23,7 +28,17 @@ src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/mod
 libmodules = static_library('libmodules', src_libmodules, dependencies: [thread_dep, dependency('lua-5.4')], include_directories: include_directories('src/'))
 
 src_main = ['src/main.cpp', 'src/utility/utility.cpp']
-executable('fake-cmd', src_main, dependencies: [thread_dep], include_directories: include_directories('src/'), link_with: [libmodules])
+if get_option('CD') == true
+	if get_option('CD_32BIT') == true
+		main_name = 'fake-cmd_i686'
+	else
+		main_name = 'fake-cmd_x86_64'
+	endif
+else
+	main_name = 'fake-cmd_' + host_machine.cpu()
+endif
+
+fakecmd = executable(main_name, src_main, dependencies: [thread_dep], include_directories: include_directories('src/'), link_with: [libmodules])
 libfakecmd = static_library('libfakecmd', src_main, dependencies: [thread_dep], include_directories: include_directories('src/'), link_with: [libmodules])
 
 src_monolithictest = ['test/monolithicTest.cpp']
