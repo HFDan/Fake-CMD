@@ -9,5 +9,6 @@ typedef std::vector<std::string> command;
 
 command tokenizeCommand(const std::string& input);
 
-std::string __GetModulePath();	// TODO: Backend this function in the future
+// std::string __GetModulePath();
+// // Function has been backended
 void registerRuntimeCommands();

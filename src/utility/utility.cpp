@@ -1,3 +1,4 @@
+#include <debug.h>
 #include <modules/modules.h>
 #include <utility/utility.h>
 
@@ -9,11 +10,17 @@
 #include <string>
 #include <vector>
 
+#ifdef _WIN32
+
+#else
+#include <ncurses.h>
+#endif
+
 std::map<std::string, std::string> runtimeModules;
 
 #ifdef _WIN32
-#include <windows.h>
 #include <Shlobj.h>
+#include <windows.h>
 std::string __GetModulePath() {
 	std::string Path = "";
 	LPSTR foo = new char[MAX_PATH];

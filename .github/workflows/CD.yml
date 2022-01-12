@@ -1,0 +1,37 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "windows-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: build
+          directory: Build-x64
+          meson-version: 0.61.0
+          setup-options: -Ddefault_library=static --buildtype release -DCD=true
+
+      - uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: build
+          directory: Build-i686
+          meson-version: 0.61.0
+          setup-options: -Ddefault_library=static --buildtype release -DCD=true -DCD_32BIT=true
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          draft: true
+          files: |
+            Build-x64/fake-cmd_x86_64.exe
+            Build-i686/fake-cmd_i686.exe
