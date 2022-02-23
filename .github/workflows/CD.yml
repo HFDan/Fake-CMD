@@ -17,14 +17,14 @@ jobs:
         with:
           action: build
           directory: Build-x64
-          meson-version: 0.61.0
+          meson-version: 0.61.2
           setup-options: -Ddefault_library=static --buildtype release -DCD=true
 
       - uses: BSFishy/meson-build@v1.0.3
         with:
           action: build
           directory: Build-i686
-          meson-version: 0.61.0
+          meson-version: 0.61.2
           setup-options: -Ddefault_library=static --buildtype release -DCD=true -DCD_32BIT=true
 
       - uses: "marvinpinto/action-automatic-releases@latest"
