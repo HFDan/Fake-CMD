@@ -12,10 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-    - uses: BSFishy/meson-build@v1.0.3
-      with:
-        action: test
-        directory: Build
-        meson-version: 0.61.0
-        setup-options: -Ddefault_library=static --buildtype debug
+    - uses: actions/setup-python@v2.3.2
+    - uses: ilammy/msvc-dev-cmd@v1
+    - name: Debug build
+      run: |
+        pip install meson
+        pip install ninja
+        meson setup Build -Ddefault_library=static --buildtype debug
+        cd Build
+        ninja test

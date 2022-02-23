@@ -12,20 +12,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v1
-      - uses: BSFishy/meson-build@v1.0.3
-        with:
-          action: build
-          directory: Build-x64
-          meson-version: 0.61.0
-          setup-options: -Ddefault_library=static --buildtype release -DCD=true
-
-      - uses: BSFishy/meson-build@v1.0.3
-        with:
-          action: build
-          directory: Build-i686
-          meson-version: 0.61.0
-          setup-options: -Ddefault_library=static --buildtype release -DCD=true -DCD_32BIT=true
+      - uses: actions/setup-python@v2.3.2
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Build artifacts
+        run: | 
+          pip install ninja
+          pip install meson
+          meson setup Build-x86_64 -Ddefault_library=static --buildtype release -DCD=true
+          cd Build-x86_64
+          ninja
+          cd ..
+          meson setup Build-i686 -Ddefault_library=static --buildtype release -DCD=true -DCD_32BIT=true
+          cd Build-i686
+          ninja
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
