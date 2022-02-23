@@ -13,18 +13,30 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2.3.2
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: Build artifacts
-        run: | 
+      - name: Setup meson and ninja
+        run: |
           pip install ninja
           pip install meson
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+      - name: Build x64 artifacts
+        run: | 
           meson setup Build-x86_64 -Ddefault_library=static --buildtype release -DCD=true
           cd Build-x86_64
           ninja
           cd ..
+      
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64_x86
+      - name: Build i686 artifacts
+        run: |
           meson setup Build-i686 -Ddefault_library=static --buildtype release -DCD=true -DCD_32BIT=true
           cd Build-i686
           ninja
+          cd ..
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
