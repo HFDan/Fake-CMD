@@ -1,0 +1,48 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "windows-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2.3.2
+      - name: Setup meson and ninja
+        run: |
+          pip install ninja
+          pip install meson
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+      - name: Build x64 artifacts
+        run: | 
+          meson setup Build-x86_64 -Ddefault_library=static --buildtype release -DCD=true
+          cd Build-x86_64
+          ninja
+          cd ..
+      
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64_x86
+      - name: Build i686 artifacts
+        run: |
+          meson setup Build-i686 -Ddefault_library=static --buildtype release -DCD=true -DCD_32BIT=true
+          cd Build-i686
+          ninja
+          cd ..
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          draft: true
+          files: |
+            Build-x64/fake-cmd_x86_64.exe
+            Build-i686/fake-cmd_i686.exe
