@@ -24,7 +24,7 @@ jobs:
       - name: Build x64 artifacts
         run: | 
           meson setup Build-x64 -Ddefault_library=static --buildtype release -DCD=true
-          cd Build-x86_64
+          cd Build-x64
           ninja
           cd ..
       
