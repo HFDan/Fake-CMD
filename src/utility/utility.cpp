@@ -10,13 +10,7 @@
 #include <string>
 #include <vector>
 
-#ifdef _WIN32
-
-#else
-#include <ncurses.h>
-#endif
-
-std::map<std::string, std::string> runtimeModules;
+extern std::map<std::string, std::string> runtimeModules;
 
 #ifdef _WIN32
 #include <Shlobj.h>

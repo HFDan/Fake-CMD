@@ -1,4 +1,4 @@
-project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'], version: '2.0.0-rc2')
+project('fake-cmd', 'cpp', default_options:['c_std=c11', 'cpp_std=c++20'], version: '2.0.0')
 
 if get_option('CD_32BIT')
 	add_global_arguments('-m32"', language : 'c')
@@ -24,7 +24,7 @@ thread_dep = dependency('threads')
 gtest = subproject('gtest')
 lua = subproject('lua')
 
-src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp', 'src/lua/extensions/lua_fakecmd.cpp']
+src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp', 'src/lua/extensions/lua_fakecmd.cpp', 'src/modules/help.cpp']
 libmodules = static_library('libmodules', src_libmodules, dependencies: [thread_dep, dependency('lua-5.4')], include_directories: include_directories('src/'))
 
 src_main = ['src/main.cpp', 'src/utility/utility.cpp']
