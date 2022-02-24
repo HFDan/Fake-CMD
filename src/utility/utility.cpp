@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-std::map<std::string, std::string> runtimeModules;
+extern std::map<std::string, std::string> runtimeModules;
 
 #ifdef _WIN32
 #include <Shlobj.h>

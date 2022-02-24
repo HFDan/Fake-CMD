@@ -9,10 +9,13 @@ MODULEFUNC(netstat);
 
 MODULEFUNC(syskey);
 
+MODULEFUNC(help);
+
 std::map<std::string, module> modules = {
 
 	{"tree", tree}, 
 	{"netstat", netstat},
-	{"syskey", syskey}
+	{"syskey", syskey},
+	{"help", help}
 
 };

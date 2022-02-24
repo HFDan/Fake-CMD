@@ -2,8 +2,11 @@
 #include <lua/extensions/lua_fakecmd.h>
 
 #include <string>
+#include <map>
 
 #include "lua.hpp"
+
+std::map<std::string, std::string> runtimeModules;
 
 void executeRuntimeModule(std::string file) {
 	lua_State* L = luaL_newstate();

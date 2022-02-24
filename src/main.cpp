@@ -4,6 +4,7 @@
 #include <utility/utility.h>
 
 #include <chrono>
+#include <cstdio>
 #include <iostream>
 #include <map>
 #include <string>
@@ -48,7 +49,7 @@ int main(int argc, char **argv) {
 			executeRuntimeModule(runtimeModules[cmd[0]]);
 
 		} else {
-			fputs("Unknown Command\n", stderr);
+			fprintf(stderr, "\"%s\" is not recognized as an internal or external command, operable program or batch file\n", cmd[0].c_str());
 			fflush(stderr);
 		}
 	}
