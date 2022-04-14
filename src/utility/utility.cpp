@@ -73,3 +73,7 @@ void registerRuntimeCommands() {
 			entry.path().generic_string()));
 	}
 }
+
+void __hitFunctionStub(const char* file, int line) {
+	FCMD_DEBUGMSG("C++", 1, "Hit function stub in file %s at line %i", file, line);	
+}

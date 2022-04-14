@@ -1,3 +1,5 @@
 packagecache/
 googletest-release-*/
 lua-*/
+gtk/
+gi-docgen/
