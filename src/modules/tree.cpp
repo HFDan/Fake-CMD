@@ -19,17 +19,20 @@ MODULEFUNC(tree) {
 	}
 
 	system(CLEAR_COMMAND);
+	// clang-format off
 	printf(
-		"\nAll files "
-		"scanned:\n\n|___________|___________|______________|__________________"
-		"________|\n|  Viruses  |  Hackers  | IP Infection |        Conclusion "
-		"       "
-		"|\n|___________+___________+______________+__________________________|"
-		"\n| 0         | 0         | None         | PC: Healthy              "
-		"|\n| All Clear | All Clear | All Clear    | Tech Support: Not needed "
-		"|\n|           |           |              |                          "
-		"|\n|___________|___________|______________|__________________________|"
-		"\n\n\n");
+R"(All files scanned:
+
+_________________________________________________________________
+|  Viruses  |  Hackers  | IP Infection |        Conclusion        |
+|___________+___________+______________+__________________________|
+| 0         | 0         | None         | PC: Healthy              |
+| All Clear | All Clear | All Clear    | Tech Support: Not needed |
+|           |           |              |                          |
+|___________|___________|______________|__________________________|)"
+	);
+	// clang-format on
+	fflush(stdout);
 	std::this_thread::sleep_for(std::chrono::seconds(10));
 	system(CLEAR_COMMAND);
 
