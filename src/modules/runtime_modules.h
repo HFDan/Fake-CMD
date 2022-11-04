@@ -1,4 +1,4 @@
 #pragma once
-#include <string>
+#include <string_view>
 
-void executeRuntimeModule(std::string file);
+void executeRuntimeModule(std::string_view file);

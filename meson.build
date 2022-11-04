@@ -16,9 +16,9 @@ if host_machine.system() == 'linux'
 	add_global_arguments('-DCLEAR_COMMAND="clear"', language : 'cpp')
 endif
 
-if get_option('buildtype').startswith('debug')
-	add_project_arguments('-DDEBUG', language : 'cpp')
-	add_project_arguments('-DDEBUG', language : 'c')
+if not get_option('buildtype').startswith('debug')
+	add_project_arguments('-DNDEBUG', language : 'cpp')
+	add_project_arguments('-DNDEBUG', language : 'c')
 endif
 
 thread_dep = dependency('threads')
@@ -26,7 +26,7 @@ gtest = subproject('gtest')
 lua = subproject('lua')
 libmodules_deps = [thread_dep, dependency('lua-5.4')]
 
-src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp', 'src/lua/extensions/lua_fakecmd.cpp', 'src/modules/help.cpp', 'src/utility/utility.cpp']
+src_libmodules = ['src/modules/modules.cpp', 'src/modules/netstat.cpp', 'src/modules/syskey.cpp', 'src/modules/tree.cpp', 'src/modules/runtime_modules.cpp', 'src/lua/extensions/lua_fakecmd.cpp', 'src/modules/help.cpp', 'src/utility/utility.cpp', 'src/globals.cpp']
 libmodules = static_library('libmodules', src_libmodules, dependencies: libmodules_deps, include_directories: include_directories('src/'))
 
 src_main = ['src/main.cpp', 'src/utility/utility.cpp']

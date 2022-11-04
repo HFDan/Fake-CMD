@@ -1,19 +1,19 @@
 #include <cstdio>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include "modules.h"
 
-extern std::map<std::string, module> modules;
-extern std::map<std::string, std::string> runtimeModules;
+extern const std::unordered_map<std::string, module> modules;
+extern std::unordered_map<std::string, std::string> runtimeModules;
 
 MODULEFUNC(help) {
 
 	puts("Available commands:");
-	for (auto it : modules) {
-		printf("%s\n", it.first.c_str());
+	for (const auto& [name, func] : modules) {
+		printf("%s\n", name.c_str());
 	}	
-	for (auto it : runtimeModules) {
-		printf("%s\n", it.first.c_str());
+	for (const auto& [name, func] : runtimeModules) {
+		printf("%s\n", name.c_str());
 	}
 
 	return 0;

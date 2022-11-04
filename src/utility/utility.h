@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #define hitFunctionStub(file, line) __hitFunctionStub(file, line)
 void __hitFunctionStub(const char* file, int line);
 #else
@@ -16,7 +16,6 @@ typedef std::vector<std::string> command;
 
 command tokenizeCommand(const std::string& input);
 
-// std::string __GetModulePath();
-// // Function has been backended
+std::string GetModulePath();
 void registerRuntimeCommands();
 

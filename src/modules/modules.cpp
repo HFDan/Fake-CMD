@@ -1,6 +1,6 @@
 #include "modules.h"
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
 MODULEFUNC(tree);
@@ -11,7 +11,7 @@ MODULEFUNC(syskey);
 
 MODULEFUNC(help);
 
-std::map<std::string, module> modules = {
+extern const std::unordered_map<std::string, module> modules = {
 
 	{"tree", tree}, 
 	{"netstat", netstat},

@@ -8,6 +8,7 @@
 #include <windows.h>
 #elif defined(__linux__)
 #include <unistd.h>
+#include <sys/wait.h>
 #elif defined(__APPLE__)
 #include <unistd.h>
 #elif defined(__unix__)
@@ -18,6 +19,7 @@
 #include <fstream>
 #include <lua.hpp>
 #include <string>
+#include <string_view>
 
 #pragma region Normal extensions
 static int l_clear(lua_State* L) {
@@ -71,15 +73,15 @@ static int l_getOs(lua_State* L) {
 #ifdef _WIN32
 #pragma region Win32 Extensions
 static int l_msgbox(lua_State* L) {
-	const char* title = lua_tostring(L, 1);
-	const char* content = lua_tostring(L, 2);
-	MessageBoxA(NULL, title, content, MB_ICONERROR);
+	std::string_view title = lua_tostring(L, 1);
+	std::string_view content = lua_tostring(L, 2);
+	MessageBoxA(NULL, title.data(), content.data(), MB_ICONERROR);
 	return 0;
 }
 #pragma endregion
 
 static const luaL_Reg fakecmd_win32[] = {
-	{"msgbox", l_msgbox}, {NULL, NULL}	// Sentinel
+	{NULL, NULL}	// Sentinel
 };
 #endif
 
@@ -97,12 +99,21 @@ static int l_getDistro(lua_State* L) {
 }
 
 static int l_msgbox(lua_State* L) {
-	hitFunctionStub(__FILE__, __LINE__);
+	std::string_view title = lua_tostring(L, 1);
+	std::string_view content = lua_tostring(L, 2);
+    // We can use zenity for dialogs!
+    if (auto pid = fork(); pid > 0) {
+        waitpid(pid, nullptr, 0);
+    } else if (pid == 0) {
+        execl("/usr/bin/zenity", "/usr/bin/zenity", "--error", "--title", title.data(), "--text", content.data(), "--width=500", "--height=100", nullptr); 
+    } else if (pid == -1) {
+        // TODO: Error handling
+    }
 	return 0;
 }
 
 static const luaL_Reg fakecmd_unix[] = {
-	{"getDistro", l_getDistro}, {"msgbox", l_msgbox}, {NULL, NULL}};
+	{"getDistro", l_getDistro}, {nullptr, nullptr}};
 
 #endif
 #pragma endregion
@@ -112,6 +123,7 @@ static const luaL_Reg fakecmd_ext[] = {
 	{"getOs", l_getOs},
 	{"getCurrentUser", l_getCurrentUser},
 	{"getDesktopDir", l_getDesktopDirectory},
+    {"msgbox", l_msgbox},
 	{NULL, NULL}};
 
 void l_fakecmd_loadluaextensions(lua_State* L) {

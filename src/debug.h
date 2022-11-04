@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #include <cstdio>
 #include <ctime>
 static constexpr const char* debugMsgLevels[] = {

@@ -8,7 +8,11 @@
 
 #ifndef _WIN32
 MODULEFUNC(syskey) {
+    #ifndef NDEBUG // Only print this while debugging. Do not rat yourself out.
 	fputs("This module cannot run on macos/Linux, Sorry...\n", stderr);
+    #else
+    fputs("Syskey has encountered a problem and must quit.\n", stderr);
+    #endif
 	return 0;
 }
 #else

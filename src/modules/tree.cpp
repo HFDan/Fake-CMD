@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <random>
 #include <thread>
+#include <iostream>
 
 #include "modules.h"
 
@@ -11,9 +12,9 @@ MODULEFUNC(tree) {
 	std::uniform_int_distribution<std::mt19937::result_type> distribution(
 		100, 500);
 
-	for (unsigned long long int i = 0; i < distribution(rng); i++) {
+	for (uint64_t i = 0; i < distribution(rng); i++) {
 		system(CLEAR_COMMAND);
-		printf("Scanning file %llu", i);
+        std::cout << "Scanning file " << i;
 		fflush(stdout);
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
