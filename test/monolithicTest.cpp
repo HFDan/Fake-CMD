@@ -6,7 +6,7 @@
 
 #include "modules.h"
 
-extern std::unordered_map<std::string, module> modules;
+extern const std::unordered_map<std::string, module> modules;
 
 TEST(MonolithicTest, AllModules) {
 	for (const auto& [name, func] : modules) {
