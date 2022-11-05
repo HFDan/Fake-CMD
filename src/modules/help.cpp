@@ -4,6 +4,7 @@
 #include "modules.h"
 
 extern const std::unordered_map<std::string, module> modules;
+
 #ifdef LUASUPPORT
 extern std::unordered_map<std::string, std::string> runtimeModules;
 #endif

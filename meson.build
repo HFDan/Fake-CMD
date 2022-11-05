@@ -49,7 +49,7 @@ if get_option('LUA_SUPPORT')
     else
         libruntimemodules_deps += [dependency('lua', method: 'pkg-config')]
     endif
-    src_libruntimemodules = ['src/lua/extensions/lua_fakecmd.cpp', 'src/modules/runtime_modules.cpp', 'src/globals.cpp'] 
+    src_libruntimemodules = ['src/lua/extensions/lua_fakecmd.cpp', 'src/modules/runtime_modules.cpp', 'src/lua/luaglobals.cpp'] 
     libruntimemodules = static_library('libruntimemodules', src_libruntimemodules, dependencies: libruntimemodules_deps, include_directories: include_directories('src/'))
 endif
 
