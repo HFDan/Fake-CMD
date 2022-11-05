@@ -1,3 +1,6 @@
+# CodeChecker
+results/
+
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 cmake-build-release-x86/
@@ -41,4 +44,6 @@ compile_commands.json
 *.exe
 *.out
 *.app
+
+.clangd
 

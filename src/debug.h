@@ -1,22 +1,12 @@
 #pragma once
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #include <cstdio>
 #include <ctime>
-#define FCMD_DEBUGMSG(source, severity, msg, ...)                            \
-	switch (severity) {                                                      \
-		case 0:                                                              \
-			printf("[INFO] [%s]: " msg "\n", source, __VA_ARGS__);           \
-			break;                                                           \
-                                                                             \
-		case 1:                                                              \
-			printf("[WARNING] [%s]: " msg "\n", source, __VA_ARGS__);        \
-			break;                                                           \
-                                                                             \
-		case 2:                                                              \
-			fprintf(stderr, "[ERROR] [%s]: " msg "\n", source, __VA_ARGS__); \
-			break;                                                           \
-	}
+static constexpr const char* debugMsgLevels[] = {"INFO", "WARNING", "ERROR"};
+
+#define FCMD_DEBUGMSG(source, severity, msg, ...) \
+    printf("[%s] [%s]: " msg "\n", debugMsgLevels[severity], source, __VA_ARGS__)
 
 #else
 #define FCMD_DEBUGMSG(...)

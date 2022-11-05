@@ -1,4 +1,7 @@
 #pragma once
-#include <string>
+#include <string_view>
 
-void executeRuntimeModule(std::string file);
+#ifdef LUASUPPORT
+void executeRuntimeModule(std::string_view file);
+void registerRuntimeCommands();
+#endif

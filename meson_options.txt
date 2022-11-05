@@ -1,2 +1,5 @@
 option('CD_32BIT', type: 'boolean', value: false)
 option('CD', type: 'boolean', value: false)
+option('STATIC_LUA', type: 'boolean', value: true)
+option('LUA_SUPPORT', type: 'boolean', value: true)
+option('COMPILETIME_MODULE_SUPPORT', type: 'boolean', value: true)

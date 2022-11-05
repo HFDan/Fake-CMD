@@ -6,53 +6,70 @@
 #include <chrono>
 #include <cstdio>
 #include <iostream>
-#include <map>
 #include <string>
 #include <thread>
+#include <unordered_map>
 #include <vector>
 
-extern std::map<std::string, module> modules;
-extern std::map<std::string, std::string> runtimeModules;
+#ifdef COMPILETIMEMODULES
+extern const std::unordered_map<std::string, module> modules;
+#endif
 
-int main(int argc, char **argv) {
-	registerRuntimeCommands();
+#ifdef LUASUPPORT
+extern std::unordered_map<std::string, std::string> runtimeModules;
+#endif
 
-	for (auto it : runtimeModules) {
-		FCMD_DEBUGMSG(
-			"C++", 0, "Available runtimeModule: %s", it.first.c_str());
-	}
+int main(int argc, char** argv) {
+#ifdef LUASUPPORT
+    registerRuntimeCommands();
 
-	puts(
-		"Microsoft Windows [Version 10.0.69420.6789]\n(c) Microsoft "
-		"Corporation. All rights reserved.\n");
+    for (const auto& [name, func] : runtimeModules) {
+        FCMD_DEBUGMSG("C++", 0, "Available runtimeModule: %s", name.c_str());
+    }
+#endif
 
-	while (true) {
-		std::string input;
-		fputs("C:\\WINDOWS\\System32>", stdout);
-		fflush(stdout);
-		std::getline(std::cin, input);
+    puts(
+        "Microsoft Windows [Version 10.0.69420.6789]\n(c) Microsoft "
+        "Corporation. All rights reserved.\n");
 
-		command cmd = tokenizeCommand(input);
+    std::string input;
+    // Doing it like this allows you to quit with Ctrl+D on linux
+    while (fputs("C:\\WINDOWS\\System32>", stdout) && std::getline(std::cin, input)) {
+        fflush(stdout);
 
-		if (cmd.empty()) {
-			continue;
-		}
+        command cmd = tokenizeCommand(input);
 
-		if (cmd[0] == "exit") {
-			break;
+        if (cmd.empty()) {
+            continue;
+        }
 
-		} else if (modules.count(cmd[0]) > 0) {
-			auto func = modules[cmd[0]];
-			func(cmd);
+        if (cmd[0] == "exit") {
+            break;
 
-		} else if (runtimeModules.count(cmd[0]) > 0) {
-			executeRuntimeModule(runtimeModules[cmd[0]]);
+        }
+#ifdef COMPILETIMEMODULES
+        else if (modules.contains(cmd[0])) {
+            auto func = modules.at(cmd[0]);
+            func(cmd);
 
-		} else {
-			fprintf(stderr, "\"%s\" is not recognized as an internal or external command, operable program or batch file\n", cmd[0].c_str());
-			fflush(stderr);
-		}
-	}
+        }
+#endif
 
-	return 0;
+#ifdef LUASUPPORT
+        else if (runtimeModules.contains(cmd[0])) {
+            executeRuntimeModule(runtimeModules[cmd[0]]);
+
+        }
+#endif
+        else {
+            fprintf(
+                stderr,
+                "\"%s\" is not recognized as an internal or external command, "
+                "operable program or batch file\n",
+                cmd[0].c_str());
+            fflush(stderr);
+        }
+    }
+
+    return 0;
 }

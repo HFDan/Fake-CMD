@@ -4,5 +4,7 @@
 
 local file = io.open("amogus.txt", "a")
 
-file:write("Dababy school of sussy amogus")
-file:close()
+if file ~= nil then
+    file:write("Dababy school of sussy amogus")
+    file:close() 
+end
