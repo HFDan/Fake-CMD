@@ -6,8 +6,7 @@
 #include <vector>
 
 #ifndef NDEBUG
-#define hitFunctionStub(file, line) __hitFunctionStub(file, line)
-void __hitFunctionStub(const char* file, int line);
+#define hitFunctionStub(file, line) FCMD_DEBUGMSG("C++", 1, "Hit function stub in file %s at line %i", file, line);
 #else
 #define hitFunctionStub(file, line)
 #endif
