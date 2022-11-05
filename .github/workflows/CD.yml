@@ -11,14 +11,14 @@ jobs:
     runs-on: "windows-latest"
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2.3.2
+      - uses: actions/checkout@v2.5.0
+      - uses: actions/setup-python@v4.3.0
       - name: Setup meson and ninja
         run: |
           pip install ninja
           pip install meson
 
-      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/msvc-dev-cmd@v1.12.0
         with:
           arch: amd64
       - name: Build x64 artifacts
@@ -28,7 +28,7 @@ jobs:
           ninja
           cd ..
       
-      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/msvc-dev-cmd@v1.12.0
         with:
           arch: amd64_x86
       - name: Build i686 artifacts
