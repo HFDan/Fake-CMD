@@ -1,7 +1,7 @@
 #include "modules.h"
 
 MODULEFUNC(netstat) {
-	// clang-format off
+    // clang-format off
 	printf(
 R"(  Proto  Local Address          Foreign Address        State
 TCP    127.0.0.1:69                                  NO_HACKERS_DETECTED 
@@ -16,7 +16,7 @@ TCP    127.0.0.1:4324                                NO_HACKERS_DETECTED
 UDP    127.0.0.1:420                                 NO_HACKERS_DETECTED)"
 "\n"
    	);
-	// clang-format on
+    // clang-format on
 
-	return 0;
+    return 0;
 }

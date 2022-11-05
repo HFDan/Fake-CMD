@@ -19,4 +19,3 @@ command tokenizeCommand(const std::string& input);
 #ifdef LUASUPPORT
 std::string GetModulePath();
 #endif
-
