@@ -11,16 +11,23 @@
 #include <thread>
 #include <vector>
 
+#ifdef COMPILETIMEMODULES
 extern const std::unordered_map<std::string, module> modules;
+#endif
+
+#ifdef LUASUPPORT
 extern std::unordered_map<std::string, std::string> runtimeModules;
+#endif
 
 int main(int argc, char **argv) {
+    #ifdef LUASUPPORT
 	registerRuntimeCommands();
 
 	for (const auto& [name, func] : runtimeModules) {
 		FCMD_DEBUGMSG(
 			"C++", 0, "Available runtimeModule: %s", name.c_str());
 	}
+    #endif
 
 	puts(
 		"Microsoft Windows [Version 10.0.69420.6789]\n(c) Microsoft "
@@ -40,14 +47,23 @@ int main(int argc, char **argv) {
 		if (cmd[0] == "exit") {
 			break;
 
-		} else if (modules.contains(cmd[0])) {
+		} 
+
+        #ifdef COMPILETIMEMODULES
+        else if (modules.contains(cmd[0])) {
 			auto func = modules.at(cmd[0]);
 			func(cmd);
 
-		} else if (runtimeModules.contains(cmd[0])) {
+		}
+        #endif
+
+        #ifdef LUASUPPORT
+        else if (runtimeModules.contains(cmd[0])) {
 			executeRuntimeModule(runtimeModules[cmd[0]]);
 
-		} else {
+		}
+        #endif
+        else {
 			fprintf(stderr, "\"%s\" is not recognized as an internal or external command, operable program or batch file\n", cmd[0].c_str());
 			fflush(stderr);
 		}

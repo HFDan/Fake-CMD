@@ -16,6 +16,7 @@ typedef std::vector<std::string> command;
 
 command tokenizeCommand(const std::string& input);
 
+#ifdef LUASUPPORT
 std::string GetModulePath();
-void registerRuntimeCommands();
+#endif
 

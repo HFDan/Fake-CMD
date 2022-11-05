@@ -6,6 +6,7 @@
 
 #include "modules.h"
 
+#ifdef COMPILETIMEMODULES
 extern const std::unordered_map<std::string, module> modules;
 
 TEST(MonolithicTest, AllModules) {
@@ -16,3 +17,4 @@ TEST(MonolithicTest, AllModules) {
 		EXPECT_EQ(0, func(args));
 	}
 }
+#endif

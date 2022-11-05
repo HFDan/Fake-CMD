@@ -7,8 +7,8 @@
 #include <unordered_map>
 #include <filesystem>
 
+#ifdef LUASUPPORT
 #include "lua.hpp"
-
 extern std::unordered_map<std::string, std::string> runtimeModules;
 
 void executeRuntimeModule(std::string_view file) {
@@ -41,3 +41,4 @@ void registerRuntimeCommands() {
         }
 	}
 }
+#endif

@@ -10,37 +10,39 @@
 #include <string>
 #include <vector>
 
+#ifdef LUASUPPORT
 extern std::unordered_map<std::string, std::string> runtimeModules;
 
-#ifdef _WIN32
-#include <Shlobj.h>
-#include <windows.h>
-std::string GetModulePath() {
-	std::string Path = "";
-	LPSTR foo = new char[MAX_PATH];
-	if (SHGetFolderPath(NULL, CSIDL_PROFILE, NULL, 0, foo) != S_OK) {
-		printf("Error getting path.\n");
-	}
-	Path = std::string(foo) + std::string(R"(\.fake_cmd\)");
-	delete[] foo;
-	return Path;
-}
+    #ifdef _WIN32
+    #include <Shlobj.h>
+    #include <windows.h>
+    std::string GetModulePath() {
+        std::string Path = "";
+        LPSTR foo = new char[MAX_PATH];
+        if (SHGetFolderPath(NULL, CSIDL_PROFILE, NULL, 0, foo) != S_OK) {
+            printf("Error getting path.\n");
+        }
+        Path = std::string(foo) + std::string(R"(\.fake_cmd\)");
+        delete[] foo;
+        return Path;
+    }
 
-#else
-#include <unistd.h>
+    #else
+    #include <unistd.h>
 
-std::string GetModulePath() {
-	std::string Path = "";
-	auto Username = new char[32];	// The username char limit in linux is 32
-									// chars as per man useradd
-	getlogin_r(Username, 32);
+    std::string GetModulePath() {
+        std::string Path = "";
+        auto Username = new char[32];	// The username char limit in linux is 32
+                                        // chars as per man useradd
+        getlogin_r(Username, 32);
 
-	Path = std::string(R"(/home/)") + std::string(Username) +
-		   std::string(R"(/.fake_cmd/)");
+        Path = std::string(R"(/home/)") + std::string(Username) +
+            std::string(R"(/.fake_cmd/)");
 
-	delete[] Username;
-	return Path;
-}
+        delete[] Username;
+        return Path;
+    }
+    #endif
 #endif
 
 command tokenizeCommand(const std::string& input) {
