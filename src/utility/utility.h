@@ -1,10 +1,10 @@
 #pragma once
+#include <debug.h>
 #include <modules/modules.h>
 
 #include <sstream>
 #include <string>
 #include <vector>
-#include <debug.h>
 
 #ifndef NDEBUG
 #define hitFunctionStub(file, line) FCMD_DEBUGMSG("C++", 1, "Hit function stub in file %s at line %i", file, line);
